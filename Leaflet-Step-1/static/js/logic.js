@@ -1,7 +1,7 @@
 // Create the map
 var myMap = L.map("map", {
-    center: [37.09, -95.71],
-    zoom: 5,
+    center: [15.5994, -28.6731],
+    zoom: 2
 });
 
 // Adding tile layer
@@ -29,32 +29,32 @@ d3.json(queryUrl, function(json) {
               var depth = feature.geometry.coordinates[2];
               if (depth >= 90) {
                 return {
-                  color: "purple"
+                  color: "#7400b8"
                 }; 
               }
               else if (depth >= 70 && depth <= 89 ) {
                 return {
-                  color: "red"
+                  color: "#6666ff"
                 };
               } else if (depth >= 50 && depth <= 69) {
                 return {
-                  color: "orange"
+                  color: "#ff6666"
                 };
               } else if (depth >= 30 && depth <= 49) {
                 return {
-                  color: "yellow"
+                  color: "#ff66d9"
                 };
               } else if (depth >= 10 && depth <= 29) {
                 return {
-                  color: "blue"
+                  color: "#ffb366"
                 };
               } else if (depth >= -10 && depth <= 9) {
                 return {
-                  color: "green"
+                  color: "#ffff66"
                 };
               } else {
                 return {
-                  color: "pink"
+                  color: "#66ff66"
                 }
               }
             },
@@ -77,6 +77,8 @@ d3.json(queryUrl, function(json) {
             pointToLayer: function(feature, latlng) {
               return L.circleMarker(latlng, {
                 radius: Math.round(feature.properties.mag) * 3,
+                // opacity: 1,
+                fillOpacity: 1
               });
             },
           }).addTo(myMap);
