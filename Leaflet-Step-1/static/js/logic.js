@@ -61,17 +61,18 @@ d3.json(queryUrl, function(json) {
         
             onEachFeature: function(feature, layer) {
         
-              var popupText = "<b>Magnitude:</b> " + feature.properties.mag +
-                "<br><b>Location:</b> " + feature.properties.place +
-                "<br><a href='" + feature.properties.url + "'>More info</a>";
+                layer.bindPopup("<h3>" + feature.properties.place +
+                "</h3><hr><p>"+ "<b>Time:</b> " + new Date(feature.properties.time) +
+                "<br>" + "<b>Magnitude:</b> " + feature.properties.mag + 
+                "<br>" + "<b>Depth:</b> " + feature.geometry.coordinates[2] + "</p>");
         
-              layer.bindPopup(popupText, {
-                closeButton: true,
-                offset: L.point(0, -20)
-              });
-              layer.on('click', function() {
-                layer.openPopup();
-              });
+            //   layer.bindPopup(popupText, {
+            //     closeButton: true,
+            //     offset: L.point(0, -20)
+            //   });
+            //   layer.on('click', function() {
+            //     layer.openPopup();
+            //   });
             },
         
             pointToLayer: function(feature, latlng) {
