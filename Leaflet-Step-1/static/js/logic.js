@@ -22,12 +22,14 @@ function markerSize(mag) {
 // Store our API endpoint inside queryUrl
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
+var geojson;
+
 d3.json(queryUrl, function(json) {
     console.log(json)
     // Loop through the cities array and create one marker for each city object
     //for (var i = 0; i < data.length; i++) {
 
-        geoLayer = L.geoJson(json, {
+        geojson = L.geoJson(json, {
 
             style: function(feature) {
               var depth = feature.geometry.coordinates[2];
@@ -78,5 +80,27 @@ d3.json(queryUrl, function(json) {
               });
             }
           }).addTo(myMap);
-        });
+
+        
+        // Set up the legend
+        var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+        
+            var div = L.DomUtil.create('div', 'info legend'),
+                depth = [0, 10, 20, 50, 100, 200, 500, 1000],
+                labels = [];
+        
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < depth.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(depth[i] + 1) + '"></i> ' +
+                    depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+            }
+        
+            return div;
+        };
+        legend.addTo(map);
+
+    });
 
