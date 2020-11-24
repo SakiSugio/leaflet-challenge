@@ -85,13 +85,13 @@ d3.json(queryUrl, function(json) {
         
             var div = L.DomUtil.create('div', 'info legend'),
                 depth = ["-10", "10", "30", "50", "70", "90"],
-                labels = ["#7400b8", "#6666ff", "#ff6666", "#ff66d9", "#ffb366", "#66ff66"];
+                labels = ["#66ff66", "#ffb366", "#ff66d9", "#ff6666", "#6666ff", "#7400b8"];
         
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < depth.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + labels[i] + '"></i> ' +
-                    depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+                    "<i style='background:" + labels[i] + "'></i> " +
+                    depth[i]  + "<br>";
             }
         
             return div;
