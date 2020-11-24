@@ -54,10 +54,6 @@ d3.json(queryUrl, function(json) {
                 return {
                   color: "#ffb366"
                 };
-              } else if (depth >= -10 && depth <= 9) {
-                return {
-                  color: "#ffff66"
-                };
               } else {
                 return {
                   color: "#66ff66"
@@ -85,22 +81,22 @@ d3.json(queryUrl, function(json) {
         // Set up the legend
         var legend = L.control({position: 'bottomright'});
 
-        legend.onAdd = function (map) {
+        legend.onAdd = function () {
         
             var div = L.DomUtil.create('div', 'info legend'),
-                depth = [0, 10, 20, 50, 100, 200, 500, 1000],
-                labels = [];
+                depth = ["-10", "10", "30", "50", "70", "90"],
+                labels = ["#7400b8", "#6666ff", "#ff6666", "#ff66d9", "#ffb366", "#66ff66"];
         
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < depth.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + getColor(depth[i] + 1) + '"></i> ' +
+                    '<i style="background:' + labels[i] + '"></i> ' +
                     depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
             }
         
             return div;
         };
-        legend.addTo(map);
+        legend.addTo(myMap);
 
     });
 
