@@ -1,5 +1,5 @@
 # leaflet-challenge
-https://github.com/SakiSugio/leaflet-challenge/
+https://sakisugio.github.io/leaflet-challenge/
 
 Visualizing Data with Leaflet
 
